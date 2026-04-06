@@ -2,6 +2,8 @@
 @import "tw-animate-css";
 
 @theme {
+  --font-sans: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-outfit: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
   --color-brand: #f43f5e;
   --color-brand-hover: #e11d48;
 }
