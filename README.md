@@ -1,11 +1,45 @@
-<div align="center">
+# SigSmith 🔨🔥
 
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
+**Forge Your Professional Email Signature**
 
-  <h1>Built with AI Studio</h2>
+SigSmith is a minimal, professional email signature generator designed with a "forging" theme. It allows users to create high-quality, HTML-compatible email signatures that work seamlessly across major email clients like Gmail, macOS Mail, and iOS Mail.
 
-  <p>The fastest path from prompt to production with Gemini.</p>
+## ✨ Features
 
-  <a href="https://aistudio.google.com/apps">Start building</a>
+- **Live Preview**: Real-time signature updates as you type.
+- **Professional Theme**: Professional dark aesthetic with glassmorphism and subtle animations.
+- **Logo Upload**: Personalize your signature with your own company logo.
+- **Rich Text Copy**: One-click "Copy Signature" that preserves formatting and HTML structure.
+- **Security First**: Built-in XSS protection and input sanitization.
+- **Performance Optimized**: Memoized components and optimized handlers for a smooth experience.
+- **Responsive Design**: Fully functional on mobile and desktop devices.
+- **Import Guides**: Integrated instructions for setting up your signature in various email clients.
 
-</div>
+## 🛠️ Tech Stack
+
+- **Framework**: [Next.js 15+](https://nextjs.org/) (App Router)
+- **Styling**: [Tailwind CSS 4](https://tailwindcss.com/)
+- **Animations**: [Motion](https://motion.dev/) (Framer Motion)
+- **Icons**: [Lucide React](https://lucide.dev/)
+- **Language**: TypeScript
+
+## 🚀 Getting Started
+
+1. **Install Dependencies**:
+   ```bash
+   npm install
+   ```
+
+2. **Run Development Server**:
+   ```bash
+   npm run dev
+   ```
+
+3. **Build for Production**:
+   ```bash
+   npm run build
+   ```
+
+## 📜 License
+
+Forged with precision by SigSmith Labs.
