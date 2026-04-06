@@ -42,4 +42,4 @@ SigSmith is a minimal, professional email signature generator designed with a "f
 
 ## 📜 License
 
-Forged with precision by SigSmith Labs.
+MIT
