@@ -11,14 +11,39 @@ interface SignaturePreviewProps {
   setIsDarkMode: (val: boolean) => void;
   isCopied: boolean;
   sparkles: Sparkle[];
+  lastUpdatedField: string | null;
 }
+
+const ThermalField = ({ children, field, lastUpdatedField, isDarkMode, className }: any) => {
+  const isActive = field === lastUpdatedField;
+  return (
+    <motion.span
+      key={`${field}-${children}`} // Trigger animation when value changes
+      initial={isActive ? {
+        color: isDarkMode ? "#f43f5e" : "#c30f16",
+        textShadow: isDarkMode ? "0 0 15px rgba(244, 63, 94, 0.8)" : "0 0 5px rgba(195, 15, 22, 0.8)",
+        filter: "brightness(1.5)"
+      } : false}
+      animate={{
+        color: "inherit",
+        textShadow: "0 0 0px rgba(244, 63, 94, 0)",
+        filter: "brightness(1)"
+      }}
+      transition={{ duration: 1.5, ease: "easeOut" }}
+      className={className}
+    >
+      {children}
+    </motion.span>
+  );
+};
 
 export const SignaturePreview = React.memo(({
   signatureData,
   isDarkMode,
   setIsDarkMode,
   isCopied,
-  sparkles
+  sparkles,
+  lastUpdatedField
 }: SignaturePreviewProps) => {
   return (
     <motion.div
@@ -78,13 +103,25 @@ export const SignaturePreview = React.memo(({
           )}
           <div>
             <h3 className="text-xl font-bold leading-tight tracking-tight">
-              {signatureData.name || 'Your Name'}
+              <ThermalField field="name" lastUpdatedField={lastUpdatedField} isDarkMode={isDarkMode}>
+                {signatureData.name || 'Your Name'}
+              </ThermalField>
             </h3>
             <p className={cn(
               "text-sm font-medium",
               isDarkMode ? "text-zinc-400" : "text-zinc-500"
             )}>
-              {signatureData.title || 'Your Title'} {signatureData.company && <><span className="mx-1 text-zinc-500">@</span> {signatureData.company}</>}
+              <ThermalField field="title" lastUpdatedField={lastUpdatedField} isDarkMode={isDarkMode}>
+                {signatureData.title || 'Your Title'}
+              </ThermalField>
+              {signatureData.company && (
+                <>
+                  <span className="mx-1 text-zinc-500">@</span>
+                  <ThermalField field="company" lastUpdatedField={lastUpdatedField} isDarkMode={isDarkMode}>
+                    {signatureData.company}
+                  </ThermalField>
+                </>
+              )}
             </p>
           </div>
           <div className={cn(
@@ -92,28 +129,51 @@ export const SignaturePreview = React.memo(({
             isDarkMode ? "text-zinc-500" : "text-zinc-400"
           )}>
             {signatureData.phone && (
-              <span className="flex items-center gap-1">
-                <Phone size={10} className="text-zinc-500" />
-                {signatureData.phone}
-              </span>
+              <a href={`tel:${signatureData.phone}`} className="flex items-center gap-1 hover:text-rose-400 transition-colors group">
+                <Phone size={10} className="text-zinc-500 group-hover:text-rose-400" />
+                <ThermalField field="phone" lastUpdatedField={lastUpdatedField} isDarkMode={isDarkMode}>
+                  {signatureData.phone}
+                </ThermalField>
+              </a>
             )}
             {signatureData.twitter && (
-              <span className="flex items-center gap-1">
-                <Twitter size={10} className="text-zinc-500" />
-                {signatureData.twitter}
-              </span>
+              <a
+                href={`https://x.com/${signatureData.twitter.replace('@', '')}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-1 hover:text-rose-400 transition-colors group"
+              >
+                <Twitter size={10} className="text-zinc-500 group-hover:text-rose-400" />
+                <ThermalField field="twitter" lastUpdatedField={lastUpdatedField} isDarkMode={isDarkMode}>
+                  {signatureData.twitter}
+                </ThermalField>
+              </a>
             )}
             {signatureData.linkedin && (
-              <span className="flex items-center gap-1">
-                <Linkedin size={10} className="text-zinc-500" />
-                {signatureData.linkedin}
-              </span>
+              <a
+                href={`https://linkedin.com/in/${signatureData.linkedin}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-1 hover:text-rose-400 transition-colors group"
+              >
+                <Linkedin size={10} className="text-zinc-500 group-hover:text-rose-400" />
+                <ThermalField field="linkedin" lastUpdatedField={lastUpdatedField} isDarkMode={isDarkMode}>
+                  {signatureData.linkedin}
+                </ThermalField>
+              </a>
             )}
             {signatureData.website && (
-              <span className="flex items-center gap-1">
-                <Globe size={10} className="text-zinc-500" />
-                {signatureData.website.replace('https://', '').replace('http://', '')}
-              </span>
+              <a
+                href={signatureData.website.startsWith('http') ? signatureData.website : `https://${signatureData.website}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-1 hover:text-rose-400 transition-colors group"
+              >
+                <Globe size={10} className="text-zinc-500 group-hover:text-rose-400" />
+                <ThermalField field="website" lastUpdatedField={lastUpdatedField} isDarkMode={isDarkMode}>
+                  {signatureData.website.replace('https://', '').replace('http://', '')}
+                </ThermalField>
+              </a>
             )}
           </div>
         </div>

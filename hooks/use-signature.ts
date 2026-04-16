@@ -57,7 +57,7 @@ export function useSignature() {
 
     const contactParts = [
       sPhone ? `<span>${sPhone}</span>` : null,
-      sTwitter ? `<a href="https://twitter.com/${sTwitter.replace('@', '')}" style="color: #a1a1aa; text-decoration: none;">${sTwitter}</a>` : null,
+      sTwitter ? `<a href="https://x.com/${sTwitter.replace('@', '')}" style="color: #a1a1aa; text-decoration: none;">${sTwitter}</a>` : null,
       sLinkedin ? `<a href="https://linkedin.com/in/${sLinkedin}" style="color: #a1a1aa; text-decoration: none;">LinkedIn</a>` : null,
       sWebsite ? `<a href="${sWebsite}" style="color: #a1a1aa; text-decoration: none;">${sWebsite.replace('https://', '').replace('http://', '')}</a>` : null
     ].filter(Boolean);
@@ -111,8 +111,11 @@ export function useSignature() {
     }
   }, [generatedHtml]);
 
+  const [lastUpdatedField, setLastUpdatedField] = useState<string | null>(null);
+
   const updateField = useCallback((field: keyof SignatureData) => (value: string) => {
     setSignatureData(prev => ({ ...prev, [field]: value }));
+    setLastUpdatedField(field);
   }, []);
 
   return {
@@ -121,6 +124,7 @@ export function useSignature() {
     setIsDarkMode,
     isCopied,
     sparkles,
+    lastUpdatedField,
     updateField,
     handleLogoUpload,
     copyToClipboard

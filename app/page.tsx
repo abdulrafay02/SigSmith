@@ -11,6 +11,8 @@ import { SignaturePreview } from '@/components/signature-preview';
 import { useSignature } from '@/hooks/use-signature';
 import { Particles } from '@/components/ui/particles';
 
+const PARTICLE_COLORS = ["#f43f5e", "#f97316", "#c30f16"];
+
 export default function SigSmith() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -20,6 +22,7 @@ export default function SigSmith() {
     setIsDarkMode,
     isCopied,
     sparkles,
+    lastUpdatedField,
     updateField,
     handleLogoUpload,
     copyToClipboard
@@ -33,7 +36,8 @@ export default function SigSmith() {
         quantity={200}
         ease={20}
         vy={-0.2}
-        colors={["#f43f5e", "#f97316", "#c30f16"]}
+        colors={PARTICLE_COLORS}
+        glowIntensity={2}
         refresh
       />
 
@@ -82,6 +86,7 @@ export default function SigSmith() {
               setIsDarkMode={setIsDarkMode}
               isCopied={isCopied}
               sparkles={sparkles}
+              lastUpdatedField={lastUpdatedField}
             />
 
             {/* Action Buttons */}
@@ -129,6 +134,8 @@ export default function SigSmith() {
                 onClick={() => setIsModalOpen(true)}
                 className="glass-dark hover:bg-white/10 text-white font-bold rounded-lg transition-all cursor-pointer border border-white/5"
                 radius={250}
+                role="button"
+                aria-label="View Import Guide"
               >
                 <div className="py-3 px-6 flex items-center justify-center gap-3 text-sm font-outfit tracking-wider">
                   <Info size={20} />

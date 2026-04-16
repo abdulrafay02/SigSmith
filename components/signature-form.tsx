@@ -50,7 +50,7 @@ export const SignatureForm = React.memo(({ signatureData, updateField, handleLog
           onClear={() => updateField('phone')('')}
         />
         <InputField
-          label="Twitter / X"
+          label="X (Twitter)"
           icon={Twitter}
           value={signatureData.twitter}
           onChange={updateField('twitter')}
