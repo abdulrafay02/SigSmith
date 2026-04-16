@@ -9,6 +9,7 @@ import { ImportInstructionsModal } from '@/components/import-modal';
 import { SignatureForm } from '@/components/signature-form';
 import { SignaturePreview } from '@/components/signature-preview';
 import { useSignature } from '@/hooks/use-signature';
+import { Particles } from '@/components/ui/particles';
 
 export default function SigSmith() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -25,10 +26,19 @@ export default function SigSmith() {
   } = useSignature();
 
   return (
-    <main className="min-h-screen flex flex-col items-center justify-center py-4 px-4 bg-zinc-950 overflow-x-hidden">
+    <main className="min-h-screen flex flex-col items-center justify-center py-4 px-4 bg-zinc-950 overflow-x-hidden relative">
+      {/* Particles Background */}
+      <Particles
+        className="fixed inset-0 z-0"
+        quantity={150}
+        ease={80}
+        color="#f43f5e"
+        refresh
+      />
+      
       {/* Background Glows */}
-      <div className="fixed top-[-10%] left-[-10%] w-[40%] h-[40%] bg-rose-500/10 blur-[120px] rounded-full pointer-events-none" />
-      <div className="fixed bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-orange-500/10 blur-[120px] rounded-full pointer-events-none" />
+      <div className="fixed top-[-10%] left-[-10%] w-[40%] h-[40%] bg-rose-500/10 blur-[120px] rounded-full pointer-events-none z-0" />
+      <div className="fixed bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-orange-500/10 blur-[120px] rounded-full pointer-events-none z-0" />
 
       <motion.div
         initial={{ opacity: 0, y: 20 }}
