@@ -30,12 +30,13 @@ export default function SigSmith() {
       {/* Particles Background */}
       <Particles
         className="fixed inset-0 z-0"
-        quantity={150}
-        ease={80}
-        color="#f43f5e"
+        quantity={200}
+        ease={20}
+        vy={-0.2}
+        colors={["#f43f5e", "#f97316", "#c30f16"]}
         refresh
       />
-      
+
       {/* Background Glows */}
       <div className="fixed top-[-10%] left-[-10%] w-[40%] h-[40%] bg-rose-500/10 blur-[120px] rounded-full pointer-events-none z-0" />
       <div className="fixed bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-orange-500/10 blur-[120px] rounded-full pointer-events-none z-0" />

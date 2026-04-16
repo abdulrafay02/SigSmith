@@ -24,7 +24,7 @@ export const SignaturePreview = React.memo(({
     <motion.div
       layout
       className={cn(
-        "relative rounded-xl p-4 transition-all duration-700 min-h-[160px] flex items-center justify-center overflow-hidden shadow-2xl",
+        "relative rounded-lg p-4 transition-all duration-700 min-h-[160px] flex items-center justify-center overflow-hidden shadow-2xl",
         isDarkMode ? "bg-zinc-900/80 border border-white/5 backdrop-blur-md" : "bg-white border border-zinc-200"
       )}
     >

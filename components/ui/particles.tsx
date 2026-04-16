@@ -43,6 +43,7 @@ interface ParticlesProps extends ComponentPropsWithoutRef<"div"> {
   size?: number
   refresh?: boolean
   color?: string
+  colors?: string[]
   vx?: number
   vy?: number
 }
@@ -75,16 +76,18 @@ type Circle = {
   dx: number
   dy: number
   magnetism: number
+  colorIndex: number
 }
 
 export const Particles: React.FC<ParticlesProps> = ({
   className = "",
   quantity = 100,
-  staticity = 50,
-  ease = 50,
+  staticity = 30,
+  ease = 30,
   size = 0.4,
   refresh = false,
   color = "#ffffff",
+  colors = ["#f43f5e", "#f97316"],
   vx = 0,
   vy = 0,
   ...props
@@ -99,9 +102,9 @@ export const Particles: React.FC<ParticlesProps> = ({
   const dpr = typeof window !== "undefined" ? window.devicePixelRatio : 1
   const rafID = useRef<number | null>(null)
   const resizeTimeout = useRef<NodeJS.Timeout | null>(null)
-  const initCanvasRef = useRef<() => void>(() => {})
-  const onMouseMoveRef = useRef<() => void>(() => {})
-  const animateRef = useRef<() => void>(() => {})
+  const initCanvasRef = useRef<() => void>(() => { })
+  const onMouseMoveRef = useRef<() => void>(() => { })
+  const animateRef = useRef<() => void>(() => { })
 
   useEffect(() => {
     if (canvasRef.current) {
@@ -188,8 +191,8 @@ export const Particles: React.FC<ParticlesProps> = ({
     const alpha = 0
     const targetAlpha = parseFloat((Math.random() * 0.6 + 0.1).toFixed(1))
     const dx = (Math.random() - 0.5) * 0.1
-    const dy = (Math.random() - 0.5) * 0.1
-    const magnetism = 0.1 + Math.random() * 4
+    const dy = (Math.random() * -0.1)
+    const magnetism = 0.5 + Math.random() * 8
     return {
       x,
       y,
@@ -201,14 +204,16 @@ export const Particles: React.FC<ParticlesProps> = ({
       dx,
       dy,
       magnetism,
+      colorIndex: Math.floor(Math.random() * (colors?.length || 1)),
     }
   }
 
-  const rgb = hexToRgb(color)
+  const rgbs = (colors || [color]).map(c => hexToRgb(c))
 
   const drawCircle = (circle: Circle, update = false) => {
     if (context.current) {
-      const { x, y, translateX, translateY, size, alpha } = circle
+      const { x, y, translateX, translateY, size, alpha, colorIndex } = circle
+      const rgb = rgbs[colorIndex] || rgbs[0]
       context.current.translate(translateX, translateY)
       context.current.beginPath()
       context.current.arc(x, y, size, 0, 2 * Math.PI)

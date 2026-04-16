@@ -6,11 +6,40 @@
   --font-outfit: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
   --color-brand: #f43f5e;
   --color-brand-hover: #e11d48;
+
+  /* Global Border Radius Reductions (Strict 5px for uniformity) */
+  --radius-sm: 2px;
+  --radius-md: 5px;
+  --radius-lg: 5px;
+  --radius-xl: 5px;
+  --radius-2xl: 8px;
 }
 
 @layer base {
   body {
     @apply transition-colors duration-300;
+  }
+
+  /* Custom Scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #09090b;
+    /* zinc-950 */
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #17171a;
+    border-radius: 4px;
+    transition: background 0.3s ease;
+    border: 1px solid color-mix(in oklab, var(--color-white) 10%, transparent);
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #3f3f46;
+    /* zinc-700 - reduced brightness */
   }
 }
 
@@ -18,9 +47,9 @@
   .glass {
     @apply bg-white/5 backdrop-blur-xl border border-white/10 shadow-2xl;
   }
-  
+
   .glass-dark {
-    @apply bg-white/5 backdrop-blur-2xl border border-white/10 shadow-2xl;
+    @apply bg-zinc-950/20 backdrop-blur-md border border-white/5 shadow-2xl;
   }
 
   .forge-glow {

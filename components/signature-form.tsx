@@ -14,7 +14,7 @@ interface SignatureFormProps {
 export const SignatureForm = React.memo(({ signatureData, updateField, handleLogoUpload }: SignatureFormProps) => {
   return (
     <SpotlightWrapper
-      className="glass-dark backdrop-blur-xl transition-all duration-700 border border-white/5 rounded-xl px-3 pb-2 shadow-2xl"
+      className="glass-dark transition-all duration-700 border border-white/5 rounded-lg px-3 pb-2 shadow-2xl"
     >
       <div className="grid grid-cols-1 md:grid-cols-2 gap-x-2">
         <InputField
